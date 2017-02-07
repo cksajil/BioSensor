@@ -12,9 +12,6 @@ colorUnDesired   = 'k';
 LineStyle        = '-.';
 offset           = 0.1;
 
-%% Get List of files in source dictionary
-%listing = dir('C:\Users\sajil\Desktop\Glucose_Sensor');
-
 %% Image Processing Steps as mentioned in the original paper
 
 % The data were obtained from three repetitive experiments. 
@@ -24,55 +21,29 @@ offset           = 0.1;
 
 
 %% Import Data
-RGB1 = imread('Sample_0_5.tif');
-RGB2 = imread('Sample_5_5.tif');
-RGB3 = imread('Sample_10_5.tif');
-RGB4 = imread('Sample_15_5.tif');
-RGB5 = imread('Sample_20_5.tif');
 
-%% Processs data
+filename = 'output.csv';
+M = csvread(filename);
 
-% Show the original file
-%figure(1)
-%imshow(RGB)
+% Set number of Glucose Levels
+start = 1;
+L = 20;
 
-%% Filter out Red Component
-I1 = RGB1(:,:,1);
-I2 = RGB2(:,:,1);
-I3 = RGB3(:,:,1);
-I4 = RGB4(:,:,1);
-I5 = RGB5(:,:,1);
+% Remove the Headers & Labels 
+M = M(2:end,start+1:end);%start+L);
 
-%% Convert to Grey Scale
-
-% I1 = rgb2gray(RGB1);
-% I2 = rgb2gray(RGB2);
-% I3 = rgb2gray(RGB3);
-% I4 = rgb2gray(RGB4);
-% I5 = rgb2gray(RGB5);
-
-%figure(2)
-%imshow(I)
-
-% Histogram Plot of Image
-%figure(3)
-%imhist(I)
-
-%% Reshape Matrices to Vectors
-
-colVector1 = reshape(I1,[],1);
-colVector2 = reshape(I2,[],1);
-colVector3 = reshape(I3,[],1);
-colVector4 = reshape(I4,[],1);
-colVector5 = reshape(I5,[],1);
-
-%figure(4)
-%h = histogram(colVector,20);
+glucose_levels = (0.5:0.5:35)';
+glucose_levels = glucose_levels(start:end);%start+L);
 
 %% Box Plot
-figure(5)
 
-boxplot([colVector1 colVector2 colVector3 colVector4 colVector5]);
+% scrsz = get(0,'ScreenSize');
+% P1=[20 20 1800 600];
+% figure('position', P1);
+figure(1);
+
+
+boxplot(M);
 
 xlabel('Glucose Concentration $(mmolL^{-1})$','interpreter','latex','FontSize', xlabelFontSize);
 ylabel('Intensity $(a. u.)$','interpreter','latex','FontSize', ylabelFontSize,...
@@ -80,38 +51,47 @@ ylabel('Intensity $(a. u.)$','interpreter','latex','FontSize', ylabelFontSize,..
 title('Glucose Concentration Vs. Red Component Intensity',...
       'FontSize', titleFontSize,'interpreter','latex');
 
-ax = gca; 
-ax.FontSize = tickFontSize;
-set(ax,'XTickLabel',0.5:5:20.5)
-grid on
+ 
+ax1 = gca; 
+ax1.FontSize = tickFontSize;
+set(ax1,'XTickLabel',glucose_levels);
 
 h = findobj('Tag','Box');
 set(h,'Linewidth',1.5, 'Color', 'k');
 
-%grid minor
 
+%grid on
+%grid minor
 
 %% Regression Analysis
 
-figure(6)
-mu = [mean2(I1) mean2(I2) mean2(I3) mean2(I4) mean2(I5)]';
-glucose_levels = (0.5:5:20.5)';
-b1 = glucose_levels\mu;
 
-yCalc1 = b1*glucose_levels;
-scatter(glucose_levels, mu,'Marker', 'S','MarkerFaceColor', 'k');
-hold on
-plot(glucose_levels,yCalc1, 'LineWidth',2, 'Color',colorUnDesired);
+figure(2)
+
+mu = mean(M)';
+%b1 = glucose_levels\mu;
+%yCalc1 = b1*glucose_levels;
+
+%scatter(glucose_levels, mu,'Marker', 'S','MarkerFaceColor', 'k');
+
+plot(glucose_levels, mu,'Marker', 'S','MarkerFaceColor', 'k');
+
+%hold on
+
+%plot(glucose_levels,yCalc1, 'LineWidth',2, 'Color',colorUnDesired);
 
 xlabel('Glucose Concentration $(mmolL^{-1})$','interpreter','latex','FontSize', xlabelFontSize);
 ylabel('Mean Red Intensity','interpreter','latex','FontSize', ylabelFontSize,...
        'FontWeight','bold');
+   
 title('Glucose Concentration Vs. Red Component Intensity',...
       'FontSize', titleFontSize,'interpreter','latex');
 
-ax = gca; 
-ax.FontSize = tickFontSize;
-set(ax,'XTickLabel',0.5:5:20.5)
+%ylim([100, 255])
+ax2 = gca; 
+ax2.FontSize = tickFontSize;
+%set(ax2,'XTickLabel',glucose_levels)
+
 grid on
 %grid minor
 
