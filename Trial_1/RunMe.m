@@ -30,15 +30,15 @@ start = 1;
 L = 20;
 
 % Remove the Headers & Labels 
-%M = M(2:end,start+1:start+L);
+%M = M(2:end,2:end);
 
 %glucose_levels = (0.5:0.5:35)';
 %glucose_levels = glucose_levels(start:L);
 
 %% Custom Level Selection
 
-glucose_levels = [21 22 23 24]';
-M = M(2:end,43:2:49);
+glucose_levels = (3.5:2:11.5)';
+M = M(2:end,8:4:24);
 
 %% Box Plot
 
