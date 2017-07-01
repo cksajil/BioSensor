@@ -2,9 +2,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-width  		= 	8
-height 		= 	width / 1.618
-labelsize   =   13
+width  		= 	12
+height	    = 4
+#height 		= 	width / 1.618
+labelsize   =   12
 
 plt.rc('font', family='serif')
 plt.rc('text', usetex=True)
@@ -15,7 +16,7 @@ plt.rc('axes', labelsize  = labelsize)
 
 GlucoseLevels 	= 	list(np.arange(3.0, 12.5, 0.5))
 Low  			= 	3.0
-High  			= 	5.0
+High  			= 	12.0
 Step   			=   0.5
 
 IndexL       	= 	GlucoseLevels.index(Low)
@@ -39,7 +40,7 @@ plt.ylabel('Intensity($a. u.$)')
 plt.grid(False)
 #plt.show()
 fig1.set_size_inches(width, height)
-fig1.savefig('Results/Trial1_Box_'+str(Low)+'_'+str(High)+'.png')
+fig1.savefig('Results/Trial1_Box_'+str(Low)+'_'+str(High)+'.pdf')
 
 
 fig2, ax2 = plt.subplots()
@@ -60,7 +61,7 @@ plt.grid(True)
 #plt.show()
 
 fig2.set_size_inches(width, height)
-fig2.savefig('Results/Trial1_MeanRed_'+str(Low)+'_'+str(High)+'.png')
+fig2.savefig('Results/Trial1_MeanRed_'+str(Low)+'_'+str(High)+'.pdf')
 
 
 
