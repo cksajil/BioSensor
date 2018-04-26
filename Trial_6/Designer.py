@@ -14,18 +14,18 @@ plt.rc('ytick', labelsize = labelsize)
 plt.rc('axes', labelsize  = labelsize)
 
 
-# GlucoseLevels 	= 	list(np.arange(3.5, 13.5, 1.0))
-GlucoseLevels 	= 	list(np.arange(3.5, 7.5, 1.0))
+GlucoseLevels 	= 	list(np.arange(3.5, 13.5, 1.0))
+# GlucoseLevels 	= 	list(np.arange(3.5, 7.5, 1.0))
 Low  			= 	3.5
-High  			= 	6.5
+High  			= 	7.5
 Step   			=   0.5
 
 IndexL       	= 	GlucoseLevels.index(Low)
 IndexH       	= 	GlucoseLevels.index(High)
 Gselected  = np.arange(Low, High+0.5, 2*Step)
 
-# data = pd.read_csv('output_SetA.csv', index_col=0)
-data = pd.read_csv('output_SetB.csv', index_col=0)
+data = pd.read_csv('output_SetA.csv', index_col=0)
+# data = pd.read_csv('output_SetB.csv', index_col=0)
 data = data.iloc[:,range(IndexL, IndexH+1, int(Step*2))]
 
 
@@ -43,8 +43,8 @@ plt.ylabel('Intensity($a.u.$)')
 plt.grid(False)
 #plt.show()
 fig1.set_size_inches(width, height)
-# fig1.savefig('Results/Trial6_SetA_Box_'+str(Low)+'_'+str(High)+'.svg', dpi=300)
-fig1.savefig('Results/Trial6_SetB_Box_'+str(Low)+'_'+str(High)+'.png', dpi=300)
+fig1.savefig('Results/Trial6_SetA_Box_'+str(Low)+'_'+str(High)+'.svg', dpi=300)
+# fig1.savefig('Results/Trial6_SetB_Box_'+str(Low)+'_'+str(High)+'.png', dpi=300)
 
 fig2, ax2 = plt.subplots()
 fig2.subplots_adjust(left=.12, bottom=.15, right=.95, top=.97)
@@ -65,5 +65,5 @@ plt.ylabel('Mean value of red component')
 #plt.show()
 
 fig2.set_size_inches(width, height)
-# fig2.savefig('Results/Trial6_SetA_MeanRed_'+str(Low)+'_'+str(High)+'.svg', dpi=300)
-fig2.savefig('Results/Trial6_SetB_MeanRed_'+str(Low)+'_'+str(High)+'.png', dpi=300)
+fig2.savefig('Results/Trial6_SetA_MeanRed_'+str(Low)+'_'+str(High)+'.svg', dpi=300)
+# fig2.savefig('Results/Trial6_SetB_MeanRed_'+str(Low)+'_'+str(High)+'.png', dpi=300)
