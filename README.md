@@ -20,5 +20,5 @@ Analysis of bamboo strips with sample concentration 3-12 mmol/l separated by 0.5
 Analysis of Taliyola strips with sample concentration 3.5-6.5 mmol/l separated by 1.0 mmol/l.
 ### Trial_6
 Analysis of Filter paper with Normalisation with sample concentration ---- mmol/l separated by --- mmol/l.
-### Trial_6
+### Trial_7
 Analysis of Filter paper with Standardization.
